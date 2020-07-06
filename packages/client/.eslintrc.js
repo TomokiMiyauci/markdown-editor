@@ -11,7 +11,9 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
   ],
-  plugins: ['prettier'],
+  plugins: ['vue-a11y', 'prettier'],
   // add your custom rules here
-  rules: {},
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'warning' : 'off',
+  },
 }

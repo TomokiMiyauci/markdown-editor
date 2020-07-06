@@ -35,7 +35,7 @@ const config: Configuration = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['github-markdown-css'],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -54,6 +54,7 @@ const config: Configuration = {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
     '@nuxtjs/vuetify',
+    'nuxt-composition-api',
   ],
 
   eslint: {
@@ -69,7 +70,7 @@ const config: Configuration = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa'],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/markdownit'],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -80,6 +81,10 @@ const config: Configuration = {
       icons: false,
     },
     optionsPath: path.resolve(__dirname, 'vuetify.options.ts'),
+  },
+
+  markdownit: {
+    injected: true,
   },
   /*
    ** Build configuration
@@ -100,6 +105,10 @@ const config: Configuration = {
             layouts: true,
           }
         : undefined,
+  },
+
+  generate: {
+    interval: 2000,
   },
 }
 

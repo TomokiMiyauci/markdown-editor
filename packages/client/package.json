@@ -24,8 +24,11 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.10",
+    "@nuxtjs/markdownit": "^1.2.9",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
-    "nuxt": "^2.13.0"
+    "github-markdown-css": "^4.0.0",
+    "nuxt": "^2.13.0",
+    "nuxt-composition-api": "^0.10.3"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^1.0.3",
@@ -42,12 +45,14 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue-a11y": "^0.0.31",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
     "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-recess-order": "^2.0.4",
     "stylelint-config-standard": "^20.0.0",
     "ts-jest": "^26.1.0",
     "vue-jest": "^3.0.4"
