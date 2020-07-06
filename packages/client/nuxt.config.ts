@@ -107,6 +107,12 @@ const config: Configuration = {
         : undefined,
   },
 
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
+
   generate: {
     interval: 2000,
   },
