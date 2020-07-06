@@ -1,0 +1,23 @@
+{
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "boundary",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+
+  "eslint.packageManager": "yarn",
+  "eslint.workingDirectories": ["./packages/client"],
+  "eslint.validate": ["javascript", "vue"],
+  "eslint.enable": true,
+
+  "vetur.format.defaultFormatter.js": "prettier-eslint",
+  "files.autoSave": "onWindowChange",
+  "vetur.experimental.templateInterpolationService": true,
+  "vetur.format.defaultFormatter.html": "prettier"
+}

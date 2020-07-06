@@ -1,0 +1,13 @@
+{
+  "name": "markdown-editor",
+  "version": "1.0.0",
+  "author": "TomokiMiyauci <development.operation.6.6.6@gmail.com>",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": "10"
+  }
+}
