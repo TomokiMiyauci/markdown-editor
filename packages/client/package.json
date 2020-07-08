@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt-ts -o~",
+    "dev": "nuxt-ts -o",
     "build": "nuxt-ts build",
     "start": "nuxt-ts start",
     "export": "nuxt-ts export",
@@ -23,12 +23,15 @@
     }
   },
   "dependencies": {
+    "@mdi/js": "^5.3.45",
     "@nuxt/typescript-runtime": "^0.4.10",
     "@nuxtjs/markdownit": "^1.2.9",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "github-markdown-css": "^4.0.0",
     "nuxt": "^2.13.0",
-    "nuxt-composition-api": "^0.10.3"
+    "nuxt-composition-api": "^0.10.3",
+    "nuxt-purgecss": "^1.0.0",
+    "nuxt-webfontloader": "^1.1.0"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^1.0.3",
