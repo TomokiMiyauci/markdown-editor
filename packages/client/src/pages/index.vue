@@ -22,8 +22,19 @@
             auto-grow
           ></v-textarea>
         </v-col>
-        <v-col class="result markdown-body" cols="6" v-html="$md.render(text)"
+        <v-col
+          v-if="editCount"
+          class="result markdown-body"
+          cols="6"
+          v-html="$md.render(text)"
           >{{ text }}
+        </v-col>
+        <v-col v-else class="fill-height result" cols="6">
+          <v-row justify="center" class="fill-height" align="center">
+            <v-col cols="auto">
+              sfaf
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
     </v-card>
@@ -49,7 +60,11 @@ export default defineComponent({
       return Math.floor(text.value.split('\n').length)
     })
 
-    return { text, div, editorRows }
+    const editCount = computed(() => {
+      return !!text.value.split('').length
+    })
+
+    return { text, div, editorRows, editCount }
   },
 })
 </script>
