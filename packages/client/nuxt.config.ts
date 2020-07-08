@@ -55,6 +55,7 @@ const config: Configuration = {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/vuetify',
     'nuxt-composition-api',
+    'nuxt-purgecss',
   ],
 
   eslint: {
@@ -67,19 +68,70 @@ const config: Configuration = {
   },
 
   typescript: { typeCheck: false },
+
+  purgeCSS: {
+    whitelist: [
+      'html',
+      'body',
+      'nuxt-progress',
+      'spacer',
+      'primary',
+      'secondary',
+      'accent',
+      'error',
+      'warning',
+      'info',
+      'success',
+      'icon',
+      'fab',
+      'skeleton',
+      'v-application',
+      'v-application--wrap',
+      'button',
+      'input',
+      'select',
+      'textarea',
+      'container',
+      'row',
+      'no-gutters',
+      'col',
+      'col-auto',
+      'theme',
+    ],
+    whitelistPatterns: [
+      /^theme-/,
+      /^application--/,
+      /^application-*/,
+      /(col|row|fill-height)/,
+      /justify-*/,
+      /align-*/,
+      /^icon/,
+      /^(d-)/,
+      /^(text)/,
+      /.*-transition/,
+      /^_/,
+      /^v-((?!application).)*$/,
+      /^theme--*/,
+      /^container/,
+    ],
+  },
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa', '@nuxtjs/markdownit'],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/markdownit', 'nuxt-webfontloader'],
+
+  webfontloader: {
+    google: {
+      families: ['Roboto:100,300,400,500,700,900&display=swap'],
+    },
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
     customVariables: ['@/assets/variables.scss'],
-    defaultAssets: {
-      icons: false,
-    },
+    defaultAssets: false,
     optionsPath: path.resolve(__dirname, 'vuetify.options.ts'),
   },
 
