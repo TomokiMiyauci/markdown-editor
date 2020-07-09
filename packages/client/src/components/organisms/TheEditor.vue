@@ -1,7 +1,9 @@
 <template>
   <v-row style="box-sizing: border-box;" no-gutters>
     <v-col cols="1">
-      <div :style="{ minHeight }" :class="$style.base">1</div>
+      <div :style="{ minHeight }" :class="$style.base">
+        <div v-for="i in rowCount" :key="i">{{ i }}</div>
+      </div>
     </v-col>
     <v-col cols="11">
       <div
@@ -27,19 +29,34 @@ export default defineComponent({
   setup(_, { emit }) {
     const div = ref<HTMLDivElement>()
     const text = ref<string>('')
+    const rowCount = ref(1)
+    // const m = ref()
 
     watch(text, (now) => {
       emit('input', now)
     })
-
     const onInput = (e: InputEvent) => {
       if (!div.value) return
       const src = e.srcElement as HTMLDivElement
-      text.value = src.textContent
+      const innner = getInnerContent(src.childNodes)
+      const bbb = innner.join('\n')
+      console.log(bbb)
+      rowCount.value = src.childElementCount + 1
+
+      text.value = bbb
       console.log(div.value.children)
+
       console.log(e)
     }
-    return { onInput, div, text }
+
+    const getInnerContent = (list: NodeListOf<ChildNode>) => {
+      const a = []
+      list.forEach((l) => {
+        a.push(l.textContent)
+      })
+      return a
+    }
+    return { onInput, div, text, rowCount }
   },
 })
 </script>
@@ -49,6 +66,7 @@ $color: rgb(38, 50, 56);
 .base {
   box-sizing: inherit;
   padding: 20px;
+  font-family: 'Source Code Pro', monospace;
   color: white;
   background-color: $color;
   border-top: 1px solid black;
@@ -64,6 +82,7 @@ $color: rgb(38, 50, 56);
   box-sizing: inherit;
   padding-top: 20px;
   padding-bottom: 20px;
+  font-family: 'Source Code Pro', monospace;
   color: white;
   cursor: text;
   background-color: $color;
@@ -79,6 +98,7 @@ $color: rgb(38, 50, 56);
 </style>
 <style lang="scss">
 div[contenteditable] > div {
+  font-family: 'Source Code Pro', monospace;
   &:hover {
     background-color: rgb(33, 74, 136);
   }
