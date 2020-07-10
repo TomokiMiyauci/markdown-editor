@@ -30,14 +30,7 @@ const config: Configuration = {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap',
-      },
-    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
    ** Global CSS
@@ -75,6 +68,8 @@ const config: Configuration = {
   },
 
   typescript: { typeCheck: false },
+
+  modern: 'client',
 
   purgeCSS: {
     whitelist: [
@@ -129,7 +124,10 @@ const config: Configuration = {
 
   webfontloader: {
     google: {
-      families: ['Roboto:100,300,400,500,700,900&display=swap'],
+      families: [
+        'Source+Code+Pro:400&display=swap',
+        'Roboto:100,300,400,500,700,900&display=swap',
+      ],
     },
   },
   /*
