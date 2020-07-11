@@ -46,7 +46,7 @@ jobs:
       - name: Cache workspace
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace }}/packages/client/node_modules
+          path: ${{ github.workspace }}/packages/client
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
 
   lint:
@@ -77,7 +77,7 @@ jobs:
       - name: debug
         run: |
           pwd
-          ls -a
+          ls -a ../../
 
       - uses: actions/setup-node@v2-beta
         with:
@@ -86,7 +86,7 @@ jobs:
       - name: Restore workspace cache
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace }}/packages/client/node_modules
+          path: ${{ github.workspace }}/packages/client
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
 
       - name: debug
