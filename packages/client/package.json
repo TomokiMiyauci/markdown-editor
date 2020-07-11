@@ -10,7 +10,8 @@
     "serve": "nuxt-ts serve",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
-    "lint": "yarn lint:js && yarn lint:style",
+    "lint:template": "vtc --workspace src --onlyTemplate true",
+    "lint": "yarn lint:js && yarn lint:style && yarn lint:template",
     "test": "jest"
   },
   "engines": {
@@ -63,6 +64,7 @@
     "stylelint-config-recess-order": "^2.0.4",
     "stylelint-config-standard": "^20.0.0",
     "ts-jest": "^26.1.0",
-    "vue-jest": "^3.0.4"
+    "vue-jest": "^3.0.4",
+    "vue-type-check": "^1.0.0"
   }
 }
