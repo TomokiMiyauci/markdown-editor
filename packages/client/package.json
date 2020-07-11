@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@mdi/js": "^5.3.45",
-    "@nuxt/typescript-runtime": "^0.4.10",
+    "@nuxt/typescript-runtime": "^1.0.0",
     "@nuxtjs/markdownit": "^1.2.9",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/robots": "^2.4.2",
@@ -40,7 +40,8 @@
     "nuxt-webfontloader": "^1.1.0"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "^1.0.3",
+    "@nuxt/types": "^2.13.3",
+    "@nuxt/typescript-build": "^2.0.0",
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-config-typescript": "^2.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
@@ -64,7 +65,6 @@
     "stylelint-config-recess-order": "^2.0.4",
     "stylelint-config-standard": "^20.0.0",
     "ts-jest": "^26.1.0",
-    "vue-jest": "^3.0.4",
-    "vue-type-check": "^1.0.0"
+    "vue-jest": "^3.0.4"
   }
 }
