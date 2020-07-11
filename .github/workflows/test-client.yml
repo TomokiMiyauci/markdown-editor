@@ -37,6 +37,13 @@ jobs:
           path: node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
+      - name: Cache node_modules of client
+        id: node_modules_cache_client_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/packages/client/node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
       - name: Install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: yarn --check-files --frozen-lockfile --non-interactive
@@ -64,6 +71,16 @@ jobs:
         with:
           path: node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Restore node_modules of client
+        id: node_modules_cache_client_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/packages/client/node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: debug
+        run: ls -a
 
       - name: lint by ESlint and Stylelint
         run: yarn lint
