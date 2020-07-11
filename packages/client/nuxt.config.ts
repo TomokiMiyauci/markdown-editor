@@ -1,6 +1,8 @@
 import path from 'path'
 import { Configuration } from '@nuxt/types'
 
+const hostname = 'https://markdown-editor-simple.web.app'
+
 const config: Configuration = {
   /*
    ** Nuxt rendering mode
@@ -124,6 +126,7 @@ const config: Configuration = {
     '@nuxtjs/pwa',
     '@nuxtjs/markdownit',
     'nuxt-webfontloader',
+    '@nuxtjs/robots',
     '@nuxtjs/sitemap',
   ],
 
@@ -135,6 +138,11 @@ const config: Configuration = {
         'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap',
       ],
     },
+  },
+
+  robots: {
+    UserAgent: '*',
+    Sitemap: `${hostname}/sitemap.xml`,
   },
 
   pwa: {
@@ -152,7 +160,7 @@ const config: Configuration = {
 
   sitemap: {
     path: '/sitemap.xml',
-    hostname: 'https://markdown-editor-simple.web.app/',
+    hostname,
   },
   /*
    ** vuetify module configuration
