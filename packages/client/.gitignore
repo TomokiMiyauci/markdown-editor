@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Node template
+# nuxt.js build output
+.nuxt
+
+# Nuxt generate
+dist
