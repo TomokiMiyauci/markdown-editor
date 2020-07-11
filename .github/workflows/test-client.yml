@@ -82,6 +82,40 @@ jobs:
       - name: lint by ESlint and Stylelint and VTI
         run: yarn lint
 
+  audit:
+    needs: setup
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Restore node_modules of client
+        id: node_modules_cache_client_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/packages/client/node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Audit
+        run: yarn run audit
+
   build:
     needs: setup
     runs-on: ${{ matrix.os }}
@@ -124,7 +158,7 @@ jobs:
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
   export:
-    needs: [lint, build]
+    needs: [lint, audit, build]
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -188,27 +222,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Restore node_modules
-        id: node_modules_cache_id
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-      - name: Restore node_modules of client
-        id: node_modules_cache_client_id
-        uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace}}/packages/client/node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-      - name: Restore building deliverable
-        id: build_id
-        uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace}}/packages/client/.nuxt
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
-
       - name: Restore exporting deliverable
         id: export_id
         uses: actions/cache@v2
@@ -226,32 +239,6 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_DEV }}
           PROJECT_PATH: ${{ github.workspace }}
-
-  # audit:
-  #   needs: setup
-  #   runs-on: ${{ matrix.os }}
-
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
-  #       node: [10]
-
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
-
-  #     - name: checkout
-  #       uses: actions/checkout@master
-
-  #     - name: restore workspace cache
-  #       uses: actions/cache@v1
-  #       with:
-  #         path: ${{ github.workspace }}
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
-
-  #     - name: audit
-  #       run: yarn workspace client run audit
 
   # test-unit:
   #   needs: setup
