@@ -12,8 +12,9 @@
   </v-app>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'nuxt-composition-api'
+export default defineComponent({
   layout: 'empty',
   props: {
     error: {
@@ -34,7 +35,7 @@ export default {
       title,
     }
   },
-}
+})
 </script>
 
 <style scoped>
