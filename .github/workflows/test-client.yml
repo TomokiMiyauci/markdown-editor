@@ -25,11 +25,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          path: 'packages/client'
 
       - uses: actions/setup-node@v2-beta
         with:
           node-version: ${{ matrix.node }}
-
 
       - name: Cache node_modules
         id: node_modules_cache_id
@@ -40,6 +41,9 @@ jobs:
 
       - name: Install
         run: yarn --check-files --frozen-lockfile --non-interactive
+
+      - name: debug
+        run: pwd
 
       - name: Cache workspace
         uses: actions/cache@v2
@@ -59,6 +63,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          path: 'packages/client'
 
       - uses: actions/setup-node@v2-beta
         with:
