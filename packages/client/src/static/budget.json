@@ -1,0 +1,49 @@
+[
+  {
+    "path": "/*",
+    "timings": [
+      {
+        "metric": "interactive",
+        "budget": 3000
+      },
+      { "metric": "estimated-input-latency",
+        "budget": 3000
+      },
+      { "metric": "first-contentful-paint",
+        "budget": 3000
+      },
+      { "metric": "first-cpu-idle",
+        "budget": 3000
+      },
+      { "metric": "total-blocking-time",
+        "budget": 3000
+      },
+      {
+        "metric": "first-meaningful-paint",
+        "budget": 3000
+      }
+    ],
+    "resourceSizes": [
+      { "resourceType": "total", "budget": 200 },
+      { "resourceType": "document", "budget": 20 },
+      { "resourceType": "stylesheet", "budget": 50 },
+      { "resourceType": "font", "budget": 50 },
+      { "resourceType": "image", "budget": 0 },
+      { "resourceType": "media", "budget": 0 },
+      { "resourceType": "script", "budget": 150 },
+      { "resourceType": "other", "budget": 10 },
+      { "resourceType": "third-party", "budget": 20 }
+    ],
+    "resourceCounts": [
+      { "resourceType": "total", "budget": 15 },
+      { "resourceType": "document", "budget": 2 },
+      { "resourceType": "stylesheet", "budget": 10 },
+      { "resourceType": "font", "budget": 2 },
+      { "resourceType": "image", "budget": 0 },
+      { "resourceType": "media", "budget": 0 },
+      { "resourceType": "script", "budget": 15 },
+      { "resourceType": "other", "budget": 5 },
+      { "resourceType": "third-party", "budget": 5 }
+    ]
+  }
+]
