@@ -120,7 +120,12 @@ const config: Configuration = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa', '@nuxtjs/markdownit', 'nuxt-webfontloader'],
+  modules: [
+    '@nuxtjs/pwa',
+    '@nuxtjs/markdownit',
+    'nuxt-webfontloader',
+    '@nuxtjs/sitemap',
+  ],
 
   webfontloader: {
     custom: {
@@ -143,6 +148,11 @@ const config: Configuration = {
       theme_color: '#000000',
       orientation: 'portrait',
     },
+  },
+
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: 'https://markdown-editor-simple.web.app/',
   },
   /*
    ** vuetify module configuration
