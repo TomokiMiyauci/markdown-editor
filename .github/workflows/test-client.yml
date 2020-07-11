@@ -23,12 +23,12 @@ jobs:
         node: [10]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - uses: actions/setup-node@v2-beta
         with:
           node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Cache node_modules
         id: node_modules_cache_id
@@ -41,15 +41,6 @@ jobs:
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: yarn --check-files --frozen-lockfile --non-interactive
 
-      - name: debug
-        run: pwd
-
-      - name: Cache workspace
-        uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace }}/packages/client
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
-
   lint:
     needs: setup
     runs-on: ${{ matrix.os }}
@@ -60,42 +51,21 @@ jobs:
         node: [10]
 
     steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: debug
-        run: |
-          pwd
-          ls -a ../../
-
-      - name: Cache node_modules
+      - name: Restore node_modules
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
-      - name: debug
-        run: |
-          pwd
-          ls -a ../../
-
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: ${{ matrix.node }}
-
-      - name: Restore workspace cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace }}/packages/client
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
-
-      - name: debug
-        run: |
-          pwd
-          ls -a
-
-      - name: lint
+      - name: lint by ESlint and Stylelint
         run: yarn lint
 
   # audit:
