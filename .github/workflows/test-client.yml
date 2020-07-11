@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ github.workspace}}/packages/client/node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-depss-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Install
         run: yarn --check-files --frozen-lockfile --non-interactive
@@ -76,7 +76,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ github.workspace}}/packages/client/node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-depss-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: debug
         run: ls -a
