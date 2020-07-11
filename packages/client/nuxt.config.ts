@@ -69,7 +69,7 @@ const config: Configuration = {
 
   typescript: { typeCheck: false },
 
-  modern: 'client',
+  // modern: 'client',
 
   purgeCSS: {
     whitelist: [
@@ -123,11 +123,25 @@ const config: Configuration = {
   modules: ['@nuxtjs/pwa', '@nuxtjs/markdownit', 'nuxt-webfontloader'],
 
   webfontloader: {
-    google: {
-      families: [
-        'Source+Code+Pro:400&display=swap',
-        'Roboto:100,300,400,500,700,900&display=swap',
+    custom: {
+      families: ['Source+Code+Pro:400', 'Roboto:100,300,400,500,700,900'],
+      urls: [
+        'https://fonts.googleapis.com/css?family=Source+Code+Pro:400&display=swap',
+        'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap',
       ],
+    },
+  },
+
+  pwa: {
+    manifest: {
+      name: 'Markdown Editor',
+      short_name: 'Markdown Editor',
+      description: 'Simple markdown editor',
+      start_url: '/',
+      display: 'standalone',
+      background_color: '#123456',
+      theme_color: '#000000',
+      orientation: 'portrait',
     },
   },
   /*
