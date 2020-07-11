@@ -46,7 +46,7 @@ jobs:
       - name: Cache workspace
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace }}/packages/client/
+          path: ./node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
 
   lint:
@@ -61,8 +61,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          path: 'packages/client'
 
       - name: Cache node_modules
         id: node_modules_cache_id
@@ -78,7 +76,7 @@ jobs:
       - name: Restore workspace cache
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace }}/packages/client/
+          path: ./node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
 
       - name: lint
