@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ github.workspace}}/packages/client/node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-depss-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
@@ -77,7 +77,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ github.workspace}}/packages/client/node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-depss-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: lint by ESlint and Stylelint and VTI
         run: yarn lint
@@ -111,7 +111,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ github.workspace}}/packages/client/node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-depss-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Build
         run: yarn build
@@ -152,7 +152,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ github.workspace}}/packages/client/node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-depss-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Restore building deliverable
         id: build_id
