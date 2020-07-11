@@ -163,6 +163,70 @@ jobs:
 
       - name: Export static site
         run: yarn export
+
+      - name: Cache exporting deliverable
+        id: export_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/packages/client/dist
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-export-nuxt-${{ github.sha }}
+
+  deploy:
+    needs: export
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Restore node_modules of client
+        id: node_modules_cache_client_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/packages/client/node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Restore building deliverable
+        id: build_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/packages/client/.nuxt
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
+
+      - name: Restore exporting deliverable
+        id: export_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/packages/client/dist
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-export-nuxt-${{ github.sha }}
+
+      - name: Prepare deploy
+        run: cp -r dist ${{ github.workspace }}/public
+
+      - name: Deploy to hosting to Firebase
+        uses: w9jds/firebase-action@v1.3.1
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_DEV }}
+          PROJECT_PATH: ${{ github.workspace }}
+
   # audit:
   #   needs: setup
   #   runs-on: ${{ matrix.os }}
@@ -403,71 +467,6 @@ jobs:
   #     #   run: yarn workspace client deploy-storybook -- --ci
   #     #   env:
   #     #     GH_TOKEN: ${ GITHUB_ACTOR }:${{ secrets.GITHUB_TOKEN }}
-
-  # deploy:
-  #   needs: [lint, audit, test-unit, test-snapshot, build]
-  #   runs-on: ${{ matrix.os }}
-
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
-  #       node: [10]
-
-  #   defaults:
-  #     run:
-  #       working-directory: ./packages/client
-
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
-
-  #     - name: checkout
-  #       uses: actions/checkout@master
-
-  #     # - name: restore build deliverable cache
-  #     #   uses: actions/cache@v1
-  #     #   with:
-  #     #     path: ${{ github.workspace }}
-  #     #     key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-${{ github.sha }}
-
-  #     - name: restore workspace cache
-  #       uses: actions/cache@v1
-  #       with:
-  #         path: ${{ github.workspace }}
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
-
-  #     - name: restore build
-  #       uses: actions/cache@v1
-  #       with:
-  #         path:  ${{ github.workspace }}/packages/client/.nuxt/
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
-
-  #     - name: prepare deploy
-  #       run: |
-  #         ls -a
-  #         yarn build:copy
-
-  #     - name: deploy to hosting to Firebase
-  #       uses: w9jds/firebase-action@v1.3.1
-  #       with:
-  #         args: deploy --only hosting
-  #       env:
-  #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_DEV }}
-  #         PROJECT_PATH: ${{ github.workspace }}/packages/client/
-
-  #     - name: weight saving
-  #       run: |
-  #         rm -rf ./public
-  #         rm -rf ./src
-
-  #     - name: deploy to functions to Firebase
-  #       uses: w9jds/firebase-action@v1.3.1
-  #       with:
-  #         args: deploy --only functions:ssr
-  #       env:
-  #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_DEV }}
-  #         PROJECT_PATH: ${{ github.workspace }}/packages/client/
 
   # lighthouse-mobile:
   #   runs-on: ubuntu-latest
