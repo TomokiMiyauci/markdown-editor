@@ -62,12 +62,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: debug
+        run: |
+          pwd
+          ls -a ../../
+
       - name: Cache node_modules
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: debug
+        run: |
+          pwd
+          ls -a
 
       - uses: actions/setup-node@v2-beta
         with:
@@ -78,6 +88,11 @@ jobs:
         with:
           path: ${{ github.workspace }}/packages/client/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
+
+      - name: debug
+        run: |
+          pwd
+          ls -a
 
       - name: lint
         run: yarn lint
