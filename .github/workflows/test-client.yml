@@ -301,7 +301,9 @@ jobs:
           slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }}
 
       - name: debug
-        run: ls -a
+        run: |
+          ls -a ../../tmp/artifacts
+          ls -a ../../tmp/artifacts/mobile
 
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
@@ -352,6 +354,18 @@ jobs:
           name: Lighthouse reports
           path: /tmp/artifacts/desktop
 
+  notice:
+      needs: build
+      name: Slack Notification
+      runs-on: ubuntu-latest
+      if: always()
+      steps:
+      - uses: actions/checkout@v2
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_DEV }}
   # test-unit:
   #   needs: setup
   #   runs-on: ${{ matrix.os }}
