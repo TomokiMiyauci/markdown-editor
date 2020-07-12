@@ -285,6 +285,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ github.workspace }}/packages/client/stats
+          keep_files: true
   # test-unit:
   #   needs: setup
   #   runs-on: ${{ matrix.os }}
