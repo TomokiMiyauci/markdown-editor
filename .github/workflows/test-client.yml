@@ -285,7 +285,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ github.workspace }}/packages/client/stats/
+          publish_dir: packages/client/stats
           keep_files: true
   # test-unit:
   #   needs: setup
