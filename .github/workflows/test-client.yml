@@ -275,10 +275,11 @@ jobs:
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-analyzer-${{ github.sha }}
 
       - name: Deploy to Github Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3.6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: packages/client/stats
+          keep_files: true
 
   lighthouse-mobile:
     runs-on: ubuntu-latest
@@ -309,12 +310,13 @@ jobs:
         run: mv tmp/artifacts/mobile/*.html tmp/artifacts/mobile/lighthouse-mobile.html
 
       - name: Deploy to Github Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3.6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: tmp/artifacts/mobile/
+          keep_files: true
       # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
+      #   uses: peaceiris/actions-gh-pages@v3.6.2
       #   with:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     publish_dir: /tmp/artifacts
@@ -353,7 +355,7 @@ jobs:
           ls -a /tmp/artifacts
           ls -a /tmp/artifacts/desktop
       # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
+      #   uses: peaceiris/actions-gh-pages@v3.6.2
       #   with:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     publish_dir: /tmp/artifacts
