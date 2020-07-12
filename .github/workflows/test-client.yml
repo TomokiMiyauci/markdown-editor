@@ -289,45 +289,35 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - run: mkdir -p tmp/artifacts/mobile
+      - run: mkdir -p lighthouse
 
       - name: Run Lighthouse
         uses: foo-software/lighthouse-check-action@master
         with:
           author: ${{ github.actor }}
           branch: ${{ github.ref }}
-          outputDirectory: ${{ github.workspace}}/packages/client/tmp/artifacts/mobile
+          outputDirectory: ${{ github.workspace}}/packages/client/lighthouse
           urls: 'https://markdown-editor-simple.web.app/'
           sha: ${{ github.sha }}
           slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }}
 
-      - name: debug
-        run: |
-          ls -a tmp/artifacts
-          ls -a tmp/artifacts/mobile
+      # - name: Upload artifacts
+      #   uses: actions/upload-artifact@master
+      #   with:
+      #     name: Lighthouse mobile reports
+      #     path: lighthouse
 
       - name: Prepare deploy
-        run: mv tmp/artifacts/mobile/*.html tmp/artifacts/mobile/lighthouse-mobile.html
+        run: |
+          rm  -f lighthouse/result.json
+          mv lighthouse/*.html lighthouse/lighthouse-mobile.html
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3.6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: packages/client/tmp/artifacts/mobile/
+          publish_dir: packages/client/lighthouse
           keep_files: true
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3.6.2
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: /tmp/artifacts
-      #     keep_files: true
-      #     publish_branch: develop
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@master
-        with:
-          name: Lighthouse reports
-          path: /tmp/artifacts/mobile
 
   lighthouse-desktop:
     runs-on: ubuntu-latest
@@ -337,23 +327,30 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - run: mkdir -p /tmp/artifacts/desktop
+      - run:  mkdir -p lighthouse
 
       - name: run Lighthouse
         uses: foo-software/lighthouse-check-action@master
         with:
           author: ${{ github.actor }}
           branch: ${{ github.ref }}
-          outputDirectory: /tmp/artifacts/desktop
-          emulatedFormFactor: all
+          outputDirectory: ${{ github.workspace}}/packages/client/lighthouse
+          emulatedFormFactor: desktop
           urls: 'https://markdown-editor-simple.web.app/'
           sha: ${{ github.sha }}
           slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }}
 
-      - name: debug
+      - name: Prepare deploy
         run: |
-          ls -a /tmp/artifacts
-          ls -a /tmp/artifacts/desktop
+          rm  -f lighthouse/result.json
+          mv lighthouse/*.html lighthouse/lighthouse-pc.html
+
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3.6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: packages/client/lighthouse
+          keep_files: true
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3.6.2
       #   with:
@@ -362,11 +359,11 @@ jobs:
       #     keep_files: true
       #     publish_branch: develop
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@master
-        with:
-          name: Lighthouse reports
-          path: /tmp/artifacts/desktop
+      # - name: Upload artifacts
+      #   uses: actions/upload-artifact@master
+      #   with:
+      #     name: Lighthouse reports
+      #     path: /tmp/artifacts/desktop
 
   notice:
       needs: deploy
