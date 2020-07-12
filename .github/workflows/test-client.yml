@@ -148,7 +148,10 @@ jobs:
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Build
-        run: yarn build
+        run: yarn build -a
+
+      - name: Move webpack bundle analyzer
+        run: mv .nuxt/stats/ .
 
       - name: Cache building deliverable
         id: build_id
@@ -156,6 +159,13 @@ jobs:
         with:
           path: ${{ github.workspace}}/packages/client/.nuxt
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
+
+      - name: Cache webpack bundle analyzer
+        id: webpack_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/packages/client/stats
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-analyzer-${{ github.sha }}
 
   export:
     needs: [lint, audit, build]
@@ -240,6 +250,43 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_DEV }}
           PROJECT_PATH: ${{ github.workspace }}
 
+  deploy-webpack-analyzer:
+    needs: export
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Deploy to hosting to Firebase
+        uses: w9jds/firebase-action@v1.3.1
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_DEV }}
+          PROJECT_PATH: ${{ github.workspace }}
+
+      - name: Restore webpack bundle analyzer
+        id: webpack_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/packages/client/stats
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-analyzer-${{ github.sha }}
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: stats
   # test-unit:
   #   needs: setup
   #   runs-on: ${{ matrix.os }}
