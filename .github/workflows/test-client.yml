@@ -274,19 +274,11 @@ jobs:
           path: ${{ github.workspace}}/packages/client/stats
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-analyzer-${{ github.sha }}
 
-      - name: debug
-        run: |
-          pwd
-          ls -a
-          ls stats
-
-
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: packages/client/stats
-          keep_files: true
   # test-unit:
   #   needs: setup
   #   runs-on: ${{ matrix.os }}
