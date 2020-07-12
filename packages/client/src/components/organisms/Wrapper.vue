@@ -14,7 +14,7 @@
         class="pa-3"
         style="background-color: rgba(38, 50, 56, 0.8);"
         cols="6"
-        ><v-btn icon color="white"
+        ><v-btn aria-label="button-import" icon color="white"
           ><v-icon>{{ mdiFileImport }}</v-icon></v-btn
         ></v-col
       >
