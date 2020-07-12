@@ -313,7 +313,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: tmp/artifacts/mobile/
+          publish_dir: packages/client/tmp/artifacts/mobile/
           keep_files: true
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3.6.2
