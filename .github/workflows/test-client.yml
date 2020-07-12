@@ -288,31 +288,31 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - run: mkdir -p /tmp/artifacts/mobile
+      - run: mkdir -p tmp/artifacts/mobile
 
       - name: Run Lighthouse
         uses: foo-software/lighthouse-check-action@master
         with:
           author: ${{ github.actor }}
           branch: ${{ github.ref }}
-          outputDirectory: /tmp/artifacts/mobile
+          outputDirectory: tmp/artifacts/mobile
           urls: 'https://markdown-editor-simple.web.app/'
           sha: ${{ github.sha }}
           slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }}
 
       - name: debug
         run: |
-          ls -a /tmp/artifacts
-          ls -a /tmp/artifacts/mobile
+          ls -a tmp/artifacts
+          ls -a tmp/artifacts/mobile
 
       - name: Prepare deploy
-        run: mv /tmp/artifacts/mobile/*.html /tmp/artifacts/mobile/lighthouse-mobile.html
+        run: mv tmp/artifacts/mobile/*.html tmp/artifacts/mobile/lighthouse-mobile.html
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: /tmp/artifacts/mobile/
+          publish_dir: tmp/artifacts/mobile/
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
@@ -348,6 +348,10 @@ jobs:
           sha: ${{ github.sha }}
           slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }}
 
+      - name: debug
+        run: |
+          ls -a tmp/artifacts
+          ls -a tmp/artifacts/desktop
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
