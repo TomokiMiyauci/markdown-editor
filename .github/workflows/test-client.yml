@@ -342,7 +342,7 @@ jobs:
         with:
           author: ${{ github.actor }}
           branch: ${{ github.ref }}
-          outputDirectory: /tmp/artifacts/desktop
+          outputDirectory: ${{ github.workspace}}/packages/client/tmp/artifacts/desktop
           emulatedFormFactor: all
           urls: 'https://markdown-editor-simple.web.app/'
           sha: ${{ github.sha }}
@@ -350,8 +350,8 @@ jobs:
 
       - name: debug
         run: |
-          ls -a tmp/artifacts
-          ls -a tmp/artifacts/desktop
+          ls -a /tmp/artifacts
+          ls -a /tmp/artifacts/desktop
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
