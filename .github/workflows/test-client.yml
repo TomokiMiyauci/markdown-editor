@@ -295,7 +295,7 @@ jobs:
         with:
           author: ${{ github.actor }}
           branch: ${{ github.ref }}
-          outputDirectory: tmp/artifacts/mobile
+          outputDirectory: ${{ github.workspace}}/packages/client/tmp/artifacts/mobile
           urls: 'https://markdown-editor-simple.web.app/'
           sha: ${{ github.sha }}
           slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }}
@@ -342,7 +342,7 @@ jobs:
         with:
           author: ${{ github.actor }}
           branch: ${{ github.ref }}
-          outputDirectory: ${{ github.workspace}}/packages/client/tmp/artifacts/desktop
+          outputDirectory: /tmp/artifacts/desktop
           emulatedFormFactor: all
           urls: 'https://markdown-editor-simple.web.app/'
           sha: ${{ github.sha }}
