@@ -302,8 +302,8 @@ jobs:
 
       - name: debug
         run: |
-          ls -a ../../tmp/artifacts
-          ls -a ../../tmp/artifacts/mobile
+          ls -a /tmp/artifacts
+          ls -a /tmp/artifacts/mobile
 
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
@@ -355,8 +355,7 @@ jobs:
           path: /tmp/artifacts/desktop
 
   notice:
-      needs: build
-      name: Slack Notification
+      needs: deploy
       runs-on: ubuntu-latest
       if: always()
       steps:
