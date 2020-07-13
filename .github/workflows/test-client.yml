@@ -309,7 +309,7 @@ jobs:
 
       - name: Prepare deploy
         run: |
-          rm  -f lighthouse/result.json
+          rm  -f lighthouse/results.json
           mv lighthouse/*.html lighthouse/lighthouse-mobile.html
 
       - name: Deploy to Github Pages
@@ -342,7 +342,7 @@ jobs:
 
       - name: Prepare deploy
         run: |
-          rm  -f lighthouse/result.json
+          rm  -f lighthouse/results.json
           mv lighthouse/*.html lighthouse/lighthouse-pc.html
 
       - name: Deploy to Github Pages
