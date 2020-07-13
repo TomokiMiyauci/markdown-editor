@@ -42,7 +42,7 @@ const config: Configuration = {
       },
       {
         rel: 'dns-prefetch',
-        href: 'https://fonts.googleapis.com/',
+        href: 'https://fonts.googleapis.com',
         crossorigin: true,
       },
     ],
