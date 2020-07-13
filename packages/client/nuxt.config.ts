@@ -41,7 +41,7 @@ const config: Configuration = {
         crossorigin: true,
       },
       {
-        rel: 'preconnect',
+        rel: 'dns-prefetch',
         href: 'https://fonts.googleapis.com/',
         crossorigin: true,
       },
