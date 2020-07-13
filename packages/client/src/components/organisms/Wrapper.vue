@@ -16,8 +16,16 @@
         cols="6"
         ><v-btn aria-label="button-import" icon color="white"
           ><v-icon>{{ mdiFileImport }}</v-icon></v-btn
-        ></v-col
-      >
+        >
+        <v-menu>
+          <template #activator="{on}">
+            <v-btn icon v-on="on">
+              <v-icon> {{ mdiEmoticon }}</v-icon>
+            </v-btn>
+          </template>
+          <lazy-emoji-picker />
+        </v-menu>
+      </v-col>
       <v-col style="background-color: grey;" cols="6"></v-col>
     </v-row>
     <v-row no-gutters>
@@ -32,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { mdiFileImport } from '@mdi/js'
+import { mdiFileImport, mdiEmoticon } from '@mdi/js'
 import { defineComponent, ref } from 'nuxt-composition-api'
 export default defineComponent({
   setup() {
@@ -40,6 +48,7 @@ export default defineComponent({
     return {
       text,
       mdiFileImport,
+      mdiEmoticon,
     }
   },
 })
