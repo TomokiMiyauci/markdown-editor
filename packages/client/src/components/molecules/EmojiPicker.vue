@@ -1,5 +1,11 @@
 <template>
-  <picker set="facebook" :data="emojiIndex" />
+  <picker
+    set="facebook"
+    :data="emojiIndex"
+    title="Select emoji"
+    :emoji-tooltip="true"
+    v-on="$listeners"
+  />
 </template>
 
 <script lang="ts">
@@ -7,7 +13,6 @@ import { defineComponent } from 'nuxt-composition-api'
 
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast'
 import data from 'emoji-mart-vue-fast/data/facebook.json'
-const emojiIndex = new EmojiIndex(data)
 
 export default defineComponent({
   components: {
@@ -15,13 +20,11 @@ export default defineComponent({
   },
 
   setup() {
-    return {
-      emojiIndex,
-    }
+    const emojiIndex = new EmojiIndex(data)
+
+    return { emojiIndex }
   },
 })
 </script>
 
-<style>
-@import 'emoji-mart-vue-fast/css/emoji-mart.css';
-</style>
+<style src="emoji-mart-vue-fast/css/emoji-mart.css" />
