@@ -17,13 +17,22 @@
         ><v-btn aria-label="button-import" icon color="white"
           ><v-icon>{{ mdiFileImport }}</v-icon></v-btn
         >
-        <v-menu>
-          <template #activator="{on}">
-            <v-btn icon v-on="on">
-              <v-icon> {{ mdiEmoticon }}</v-icon>
-            </v-btn>
+        <v-menu
+          v-model="menu"
+          transition="slide-x-transition"
+          :close-on-content-click="false"
+        >
+          <template #activator="{on: menu, attrs}">
+            <v-tooltip bottom>
+              <template #activator="{on: tooltip }">
+                <v-btn v-bind="attrs" icon v-on="{ ...tooltip, ...menu }">
+                  <v-icon> {{ mdiEmoticon }}</v-icon>
+                </v-btn>
+              </template>
+              <span>emoji</span>
+            </v-tooltip>
           </template>
-          <lazy-emoji-picker />
+          <lazy-emoji-picker @select="menu = false" />
         </v-menu>
       </v-col>
       <v-col style="background-color: grey;" cols="6"></v-col>
@@ -45,7 +54,9 @@ import { defineComponent, ref } from 'nuxt-composition-api'
 export default defineComponent({
   setup() {
     const text = ref('')
+    const menu = ref(false)
     return {
+      menu,
       text,
       mdiFileImport,
       mdiEmoticon,
