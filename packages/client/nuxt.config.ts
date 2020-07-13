@@ -101,6 +101,7 @@ const config: Configuration = {
       'col',
       'col-auto',
       'theme',
+      'emoji-type-native',
     ],
     whitelistPatterns: [
       /^theme-/,
@@ -119,10 +120,10 @@ const config: Configuration = {
       /^container/,
       /emoji-set-facebook/,
       /emoji-type-image/,
-      /^emoji-mart*/,
+
       /^resize-observer*/,
     ],
-    whitelistPatternsChildren: [/^vue-recycle-scroller*/],
+    whitelistPatternsChildren: [/^vue-recycle-scroller*/, /^emoji-mart*/],
   },
   /*
    ** Nuxt.js modules
