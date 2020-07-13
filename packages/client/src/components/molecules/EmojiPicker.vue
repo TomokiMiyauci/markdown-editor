@@ -26,5 +26,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style src="emoji-mart-vue-fast/css/emoji-mart.css" />

@@ -37,7 +37,7 @@ const config: Configuration = {
   /*
    ** Global CSS
    */
-  css: ['github-markdown-css'],
+  css: ['github-markdown-css', 'emoji-mart-vue-fast/css/emoji-mart.css'],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
