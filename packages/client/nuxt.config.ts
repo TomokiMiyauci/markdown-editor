@@ -32,7 +32,20 @@ const config: Configuration = {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: true,
+      },
+      {
+        rel: 'dns-prefetch',
+        href: 'https://fonts.googleapis.com/',
+        crossorigin: true,
+      },
+    ],
   },
   /*
    ** Global CSS
@@ -138,10 +151,10 @@ const config: Configuration = {
 
   webfontloader: {
     custom: {
-      families: ['Source+Code+Pro:400', 'Roboto:100,300,400,500,700,900'],
+      families: ['Source+Code+Pro', 'Roboto'],
       urls: [
-        'https://fonts.googleapis.com/css?family=Source+Code+Pro:400&display=swap',
-        'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap',
+        'https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap',
+        'https://fonts.googleapis.com/css?family=Roboto&display=swap',
       ],
     },
   },
