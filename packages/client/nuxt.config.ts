@@ -57,7 +57,7 @@ const config: Configuration = {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/vuetify',
     'nuxt-composition-api',
-    // 'nuxt-purgecss',
+    'nuxt-purgecss',
   ],
 
   eslint: {
@@ -117,7 +117,12 @@ const config: Configuration = {
       /^v-((?!application).)*$/,
       /^theme--*/,
       /^container/,
+      /emoji-set-facebook/,
+      /emoji-type-image/,
+      /^emoji-mart*/,
+      /^resize-observer*/,
     ],
+    whitelistPatternsChildren: [/^vue-recycle-scroller*/],
   },
   /*
    ** Nuxt.js modules
