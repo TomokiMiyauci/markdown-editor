@@ -57,7 +57,7 @@ const config: Configuration = {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/vuetify',
     'nuxt-composition-api',
-    'nuxt-purgecss',
+    // 'nuxt-purgecss',
   ],
 
   eslint: {
