@@ -36,14 +36,13 @@ const config: Configuration = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
 
       {
-        rel: 'dns-prefetch',
+        rel: 'preconnect',
         href: 'https://fonts.gstatic.com',
         crossorigin: true,
       },
       {
         rel: 'dns-prefetch',
-        href: 'https://fonts.googleapis.com',
-        crossorigin: true,
+        href: '//fonts.googleapis.com',
       },
     ],
   },
