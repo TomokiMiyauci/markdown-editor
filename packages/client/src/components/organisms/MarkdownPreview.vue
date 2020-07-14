@@ -1,9 +1,9 @@
 <template>
   <div
-    class="markdown-body"
     :style="{ minHeight }"
     :class="$style.base"
     v-html="$md.render(text)"
+    class="markdown-body"
   ></div>
 </template>
 
@@ -27,10 +27,8 @@ export default defineComponent({
 <style lang="scss" module>
 .base {
   padding: 20px;
+  font-size: 16px;
   background-color: white;
-  border-top: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
   border-bottom-right-radius: 5px;
 }
 </style>
