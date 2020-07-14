@@ -196,7 +196,7 @@ const config: Configuration = {
 
   features: {
     router: false,
-    store: false,
+    store: true,
     middleware: false,
     transitions: false,
     deprecations: false,
@@ -206,7 +206,7 @@ const config: Configuration = {
     clientOnline: false,
     clientPrefetch: false,
     clientUseUrl: false,
-    componentAliases: false,
+    componentAliases: true,
     componentClientOnly: false,
   },
   /*
