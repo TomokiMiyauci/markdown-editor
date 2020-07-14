@@ -1,10 +1,11 @@
 <template>
   <picker
-    set="facebook"
     :data="emojiIndex"
-    title="Select emoji"
+    :sheet-size="16"
     :emoji-tooltip="true"
     v-on="$listeners"
+    set="facebook"
+    title="Select emoji"
   />
 </template>
 
