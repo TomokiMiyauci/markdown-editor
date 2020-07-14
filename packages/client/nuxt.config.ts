@@ -196,6 +196,7 @@ const config: Configuration = {
   },
 
   features: {
+    router: false,
     store: false,
     middleware: false,
     transitions: false,
@@ -214,7 +215,7 @@ const config: Configuration = {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
-    // extractCSS: process.env.NODE_ENV === 'production',
+    extractCSS: process.env.NODE_ENV === 'production',
     terser: {
       terserOptions: {
         compress: { drop_console: process.env.NODE_ENV === 'production' },
