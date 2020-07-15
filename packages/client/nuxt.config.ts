@@ -187,6 +187,34 @@ const config: Configuration = {
   vuetify: {
     customVariables: ['@/assets/variables.scss'],
     defaultAssets: false,
+    theme: {
+      disable: true,
+      dark: false,
+      options: {
+        variations: false,
+      },
+      default: false,
+      themes: {
+        light: {
+          primary: '#083b66',
+          secondary: '#3bd1b3',
+          accent: '#84FFFF',
+          error: '#AB47BC',
+          info: '#2196F3',
+          success: '#4CAF50',
+          warning: '#FFC107',
+        },
+        dark: {
+          primary: '#001688',
+          secondary: '#424242',
+          accent: '#82B1FF',
+          error: '#FF5252',
+          info: '#2196F3',
+          success: '#4CAF50',
+          warning: '#FFC107',
+        },
+      },
+    },
     optionsPath: path.resolve(__dirname, 'vuetify.options.ts'),
   },
 
