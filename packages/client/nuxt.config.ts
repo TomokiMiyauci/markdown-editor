@@ -41,7 +41,7 @@ const config: Configuration = {
         crossorigin: true,
       },
       {
-        rel: 'dns-prefetch',
+        rel: 'preconnect',
         href: '//fonts.googleapis.com',
       },
     ],
@@ -249,12 +249,12 @@ const config: Configuration = {
       },
     },
 
-    splitChunks:
-      process.env.NODE_ENV === 'production'
-        ? {
-            layouts: true,
-          }
-        : undefined,
+    //   splitChunks:
+    //     process.env.NODE_ENV === 'production'
+    //       ? {
+    //           layouts: true,
+    //         }
+    //       : undefined,
   },
 
   resolve: {
