@@ -40,6 +40,7 @@
     "nuxt-composition-api": "^0.10.3",
     "nuxt-purgecss": "^1.0.0",
     "nuxt-webfontloader": "^1.1.0",
+    "vue-promised": "^1.2.2",
     "vuex-module-decorators": "^0.17.0"
   },
   "devDependencies": {
