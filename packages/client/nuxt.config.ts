@@ -125,6 +125,7 @@ const config: Configuration = {
       /^icon/,
       /^(d-)/,
       /^(text)/,
+      /--text$/,
       /.*-transition/,
       /^_/,
       /^v-((?!application).)*$/,
@@ -135,7 +136,11 @@ const config: Configuration = {
 
       /^resize-observer*/,
     ],
-    whitelistPatternsChildren: [/^vue-recycle-scroller*/, /^emoji-mart*/],
+    whitelistPatternsChildren: [
+      /^vue-recycle-scroller*/,
+      /^emoji-mart*/,
+      /^v-progress-circular*/,
+    ],
   },
   /*
    ** Nuxt.js modules
